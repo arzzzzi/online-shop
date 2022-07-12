@@ -2,6 +2,20 @@
 function App() {
   return (
     <div className="outer">
+      <div className="overlay">
+        <div className="drawer">
+          <h2>Корзина</h2>
+          <div className="cartItem">
+            <img className="cartPic" height={70} width={70} src="/img/1.jpg" alt='item'/>
+            <div>
+              <p>Труба</p>
+              <b>999 руб.</b>
+            </div>
+            <img className="btnRemove" src="/img/btn-remove.svg" alt='Remove' />
+          </div>
+        </div>
+      </div>
+
       <header>
         <div className="headerLeft">
           <img width={40} height={40} src="https://education.sakshi.com/sites/default/files/styles/job_icon/public/icons/Engineering1_0.jpg" />
@@ -24,13 +38,16 @@ function App() {
         <div className="search-block">
           <h1>Все товары</h1>
           <div className="search">
-            <img className="loopa" width={20} height={20} src="https://www.freepnglogos.com/uploads/search-png/search-icon-transparent-images-vector-15.png"/>
-            <input placeholder="Поиск..."/>
+            <img className="loopa" width={20} height={20} src="https://www.freepnglogos.com/uploads/search-png/search-icon-transparent-images-vector-15.png" />
+            <input placeholder="Поиск..." />
           </div>
         </div>
 
         <div className="items">
           <div className="card">
+            <div className="favorite">
+              <img src="/img/unliked.svg" alt="Unlike" />
+            </div>
             <img width={133} height={112} src="img/1.jpg" />
             <h5>Водосточная труба</h5>
             <div className="cardBtn">
