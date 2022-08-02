@@ -62,7 +62,7 @@ header {
     padding: 40px;
 }
 
-.items {
+.itemsShop {
     display: flex;
 }
 
@@ -141,12 +141,23 @@ header {
 
 .drawer {
     position: absolute;
-    width: 385px;
+    width: 420px;
     height: 100%;
     right: 0;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    .items {
+        overflow: auto;
+        margin-bottom: 40px;
+    }
     h2 {
-        margin: 0;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        img {
+            cursor: pointer;
+        }
     }
     background: #fff;
     box-shadow: -10px 4px 24px rgba(0,
@@ -172,11 +183,22 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
     p {
         font-size: 16px;
+        margin: 0;
     }
     b {
         font-size: 14px;
+    }
+    .cartItemImg {
+        height: 70px;
+        width: 70px;
+        background-size: contain;
+        background-position: 0 10px;
+        background-repeat: no-repeat;
+        margin-right: 20px;
     }
     .cartPic {
         margin-right: 20px;
@@ -188,6 +210,66 @@ header {
         transition: opacity 0.15s ease-in-out;
         &:hover {
             opacity: 1;
+        }
+    }
+}
+
+.greenButton {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    width: 325px;
+    height: 55px;
+    background: #9dd558;
+    border-radius: 18px;
+    border: 0;
+    align-items: center;
+    justify-content: space-around;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.1s ease-in-out;
+    &:hover {
+        background: lighten(#9dd558, 5%);
+    }
+}
+
+.items {
+    flex: 1
+}
+
+.arrow {
+    height: 40px;
+    width: 40px;
+}
+
+.cartTotalBlock {
+    ul {
+        display: block;
+        margin-bottom: 40px !important;
+    }
+    div {
+        flex: 1;
+        border-bottom: 1px dashed #dfdfdf;
+        position: relative;
+        top: -4px;
+        margin: 0 8px;
+    }
+    li {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 20px;
+    }
+    .greenButton {
+        position: relative;
+        &:hover {
+            img {
+                transform: translateX(5px);
+            }
+        }
+        img {
+            transition: transform 0.15s ease-in-out;
         }
     }
 }
