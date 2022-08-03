@@ -148,8 +148,8 @@ header {
     display: flex;
     flex-direction: column;
     .items {
+        flex: 1;
         overflow: auto;
-        margin-bottom: 40px;
     }
     h2 {
         margin-bottom: 30px;
@@ -233,10 +233,6 @@ header {
     &:hover {
         background: lighten(#9dd558, 5%);
     }
-}
-
-.items {
-    flex: 1
 }
 
 .arrow {
