@@ -49,8 +49,9 @@ header {
     }
     .headerRight {
         display: flex;
-        li {
+        .cartIcon {
             margin-right: 30px;
+            cursor: pointer;
         }
     }
 }
@@ -64,6 +65,7 @@ header {
 
 .itemsShop {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .search {
@@ -176,16 +178,6 @@ header {
         display: flex;
         flex-direction: column;
     }
-}
-
-.button {
-    background: #ffffff;
-    border: 1px solid #f2f2f2;
-    box-sizing: border-box;
-    border-radius: 8px;
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
 }
 
 .greenButton {

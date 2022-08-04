@@ -1,4 +1,4 @@
-function Header() {
+function Header(props) {
   return (
     <header>
       <div className="headerLeft">
@@ -9,7 +9,7 @@ function Header() {
         </div>
       </div>
       <ul className="headerRight">
-        <li>
+        <li className="cartIcon" onClick={props.onClickCart}>
           <img width={20} height={20} src="https://cdn-icons-png.flaticon.com/512/118/118089.png" />
           <span>1200 руб.</span>
         </li>
