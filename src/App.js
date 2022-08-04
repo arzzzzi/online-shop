@@ -3,9 +3,24 @@ import Header from './components/Header';
 import Drawer from './components/Drawer';
 
 const arr = [
-  {name: 'Водосточная труба', price: 999},
-  {name: 'Труба', price: 599},
-  {name: 'Люк канализационный', price: 2999}
+  {
+    id: 1,
+    title: 'Водосточная труба',
+    price: 999,
+    imgUrl: './img/1.jpg'
+  },
+  {
+    id: 2,
+    title: 'Слив',
+    price: 599,
+    imgUrl: './img/2.jpg'
+  },
+  {
+    id: 3,
+    title: 'Сливная труба',
+    price: 2999,
+    imgUrl: './img/3.jpg'
+  },
 ]
 
 function App() {
@@ -23,11 +38,14 @@ function App() {
         </div>
 
         <div className="itemsShop">
-        <Card title="Водосточная труба"  price={999} imgUrl='./img/1.jpg'/>
-        <Card title="Слив" price={1875} imgUrl='./img/2.jpg'/>
-          {/* {arr.map((obj) => (
-            <Card />
-          ))} */}
+          {arr.map((obj) => (
+            <Card
+              key={obj.id}
+              title={obj.title}
+              price={obj.price}
+              imgUrl={obj.imgUrl}
+              onClick={() => console.log(obj)} />
+          ))}
         </div>
       </div>
     </div>
