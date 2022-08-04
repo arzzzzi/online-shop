@@ -1,28 +1,22 @@
-function Drawer(props) {
+function Drawer({onClose, items = []}) {
     return (
         <div className="overlay">
             <div className="drawer">
                 <h2>Корзина <img className="btnRemove" 
                 src="/img/btn-remove.svg" alt='Remove' 
-                onClick={props.onClose}/>
+                onClick={onClose}/>
                 </h2>
                 <div className="items">
-                    <div className="cartItem">
-                        <div style={{ backgroundImage: 'url(/img/1.jpg)' }} className="cartItemImg"></div>
+                    {items.map((obj) => (
+                        <div className="cartItem">
+                        <div style={{ backgroundImage: `url(${obj.imgUrl})` }} className="cartItemImg"></div>
                         <div>
-                            <p>Труба</p>
-                            <b>999 руб.</b>
+                            <p>{obj.title}</p>
+                            <b>{obj.price}</b>
                         </div>
                         <img className="btnRemove" src="/img/btn-remove.svg" alt='Remove' />
                     </div>
-                    <div className="cartItem">
-                        <div style={{ backgroundImage: 'url(/img/1.jpg)' }} className="cartItemImg"></div>
-                        <div>
-                            <p>Труба</p>
-                            <b>999 руб.</b>
-                        </div>
-                        <img className="btnRemove" src="/img/btn-remove.svg" alt='Remove' />
-                    </div>
+                    ))}
                 </div>
                 <div className="cartTotalBlock">
                     <ul>
