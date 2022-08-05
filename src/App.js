@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Card from './components/Card'
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -34,19 +35,35 @@ function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
+  const [search, setSearch] = useState('');
 
-  useEffect(() => {fetch('https://62ebdaa155d2bd170e77cf6d.mockapi.io/items')
-    .then(res => {
-      return res.json()
-    })
-    .then(json => {
-      setItems(json)
-    })
+  useEffect(() => {
+    // fetch('https://62ebdaa155d2bd170e77cf6d.mockapi.io/items')
+    //   .then(res => {
+    //     return res.json()
+    //   })
+    //   .then(json => {
+    //     setItems(json)
+    //   })
+    axios.get('https://62ebdaa155d2bd170e77cf6d.mockapi.io/items')
+      .then(res => {
+        setItems(res.data)
+      });
+      axios.get('https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart')
+      .then(res => {
+        setCartItems(res.data)
+      })  
   }, []);
 
   const onAddToCart = (obj) => {
     // setCartItems([...cartItems, obj]);
+    axios.post('https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart', obj);
     setCartItems(prev => [...prev, obj]);
+
+  }
+
+  const onChangeInput = (event) => {
+    setSearch(event.target.value)
   }
 
   return (
@@ -55,23 +72,31 @@ function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content">
         <div className="search-block">
-          <h1>Все товары</h1>
+          <h1>{search ? `Поиск по запросу: ${search}` : 'Все товары'}</h1>
           <div className="search">
             <img className="loopa" width={20} height={20} src="https://www.freepnglogos.com/uploads/search-png/search-icon-transparent-images-vector-15.png" />
-            <input placeholder="Поиск..." />
+            <input placeholder="Поиск..."
+              value={search}
+              onChange={onChangeInput} />
+            {search && (<img className="btnEmpty"
+              src="/img/btn-remove.svg"
+              alt='Remove'
+              onClick={() => setSearch('')} />
+            )}
           </div>
         </div>
 
         <div className="itemsShop">
-          {items.map((item) => (
-            <Card
-              key={item.imgUrl}
-              title={item.title}
-              price={item.price}
-              imgUrl={item.imgUrl}
-              plusClick={(obj) => onAddToCart(obj)}
-              favoriteClick={() => console.log('lol')} />
-          ))}
+          {items.filter(item => item.title.toLowerCase().includes(search.toLocaleLowerCase()))
+            .map((item) => (
+              <Card
+                key={item.imgUrl}
+                title={item.title}
+                price={item.price}
+                imgUrl={item.imgUrl}
+                plusClick={(obj) => onAddToCart(obj)}
+                favoriteClick={() => console.log('lol')} />
+            ))}
         </div>
       </div>
     </div>
