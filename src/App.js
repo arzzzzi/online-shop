@@ -1,65 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 import Card from './components/Card'
 import Header from './components/Header';
 import Drawer from './components/Drawer';
-
-// const arr = [
-//   {
-//     id: 1,
-//     title: 'Водосточная труба',
-//     price: 999,
-//     imgUrl: './img/1.jpg'
-//   },
-//   {
-//     id: 2,
-//     title: 'Слив',
-//     price: 599,
-//     imgUrl: './img/2.jpg'
-//   },
-//   {
-//     id: 3,
-//     title: 'Сливная труба',
-//     price: 2999,
-//     imgUrl: './img/3.jpg'
-//   },
-//   {
-//     id: 4,
-//     title: 'Люк',
-//     price: 1480,
-//     imgUrl: './img/4.jpg'
-//   },
-// ]
 
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
   const [search, setSearch] = useState('');
+  const [favorites, setFavorites] = useState([])
+
+  const addToFavorite = (obj) => {
+    axios.post('https://62ebdaa155d2bd170e77cf6d.mockapi.io/favorites', obj);
+    setFavorites(prev => [...prev, obj]);
+  }
 
   useEffect(() => {
-    // fetch('https://62ebdaa155d2bd170e77cf6d.mockapi.io/items')
-    //   .then(res => {
-    //     return res.json()
-    //   })
-    //   .then(json => {
-    //     setItems(json)
-    //   })
     axios.get('https://62ebdaa155d2bd170e77cf6d.mockapi.io/items')
       .then(res => {
         setItems(res.data)
       });
-      axios.get('https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart')
+    axios.get('https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart')
       .then(res => {
         setCartItems(res.data)
-      })  
+      })
   }, []);
 
   const onAddToCart = (obj) => {
-    // setCartItems([...cartItems, obj]);
     axios.post('https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart', obj);
     setCartItems(prev => [...prev, obj]);
+  }
 
+  const onRemoveFromCart = (id) => {
+    axios.delete(`https://62ebdaa155d2bd170e77cf6d.mockapi.io/cart/${id}`);
+    setCartItems(prev => prev.filter(item => item.id !== id));
   }
 
   const onChangeInput = (event) => {
@@ -68,11 +44,18 @@ function App() {
 
   return (
     <div className="outer">
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)} items={cartItems} />}
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)}
+        items={cartItems}
+        onRemove={onRemoveFromCart}/>}
       <Header onClickCart={() => setCartOpened(true)} />
+      
+      <Route path="/favorites">
+        LOL
+      </Route>
+      
       <div className="content">
         <div className="search-block">
-          <h1>{search ? `Поиск по запросу: ${search}` : 'Все товары'}</h1>
+          <h1>{search ? `Поиск по запросу:" "` : 'Все товары'}</h1>
           <div className="search">
             <img className="loopa" width={20} height={20} src="https://www.freepnglogos.com/uploads/search-png/search-icon-transparent-images-vector-15.png" />
             <input placeholder="Поиск..."
@@ -95,7 +78,7 @@ function App() {
                 price={item.price}
                 imgUrl={item.imgUrl}
                 plusClick={(obj) => onAddToCart(obj)}
-                favoriteClick={() => console.log('lol')} />
+                favoriteClick={(obj) => addToFavorite(obj)} />
             ))}
         </div>
       </div>

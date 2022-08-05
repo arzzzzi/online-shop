@@ -2,14 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styles from './Card.module.scss';
 
 
-function Card({favoriteClick, imgUrl, title, price, plusClick}) {
+function Card({ favoriteClick, imgUrl, title, price, plusClick }) {
   const [added, setAdded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+
 
   const handlePlus = () => {
-    plusClick({title, imgUrl, price});
+    plusClick({ title, imgUrl, price });
     setAdded(!added)
   };
 
+  const handleFavorite = () => {
+    favoriteClick({title, imgUrl, price})
+    setIsFavorite(!isFavorite)
+  }
   useEffect(() => {
     console.log('перем')
   },
@@ -18,8 +25,12 @@ function Card({favoriteClick, imgUrl, title, price, plusClick}) {
 
   return (
     <div className={styles.card}>
-      <div onClick={favoriteClick} className={styles.favorite}>
-        <img src="/img/unliked.svg" alt="Unlike" />
+      <div onClick={handleFavorite} className={styles.favorite}>
+        <img
+        width={22} height={22}
+          src={isFavorite ? '/img/like.png' : '/img/unliked.svg'}
+          alt="Unlike"
+        />
       </div>
       <img width={133} height={112} src={imgUrl} />
       <h5>{title}</h5>
