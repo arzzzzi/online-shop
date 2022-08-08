@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Header(props) {
   return (
     <header>
-      <Link to="/">
+      <Link to="/" >
         <div className="headerLeft">
           <img width={40} height={40} src="https://education.sakshi.com/sites/default/files/styles/job_icon/public/icons/Engineering1_0.jpg" />
           <div className="headerInfo">
