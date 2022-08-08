@@ -9,9 +9,9 @@ function Favorites({ items, addToFavorite }) {
             <div className="itemsShop">
                 {items.map((item, index) => (
                     <Card key={index}
-                    favorited={true}
-                    onFavorite={addToFavorite}
-                    {...item}
+                        favorited={true}
+                        onFavorite={addToFavorite}
+                        {...item}
                     />
                 ))}
             </div>

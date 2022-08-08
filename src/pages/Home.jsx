@@ -1,6 +1,8 @@
 import Card from '../components/Card'
 
-function Home({ items, 
+function Home({ 
+    cartItems,
+    items,
     search,
     setSearch,
     onChangeInput,
@@ -24,14 +26,16 @@ function Home({ items,
             </div>
 
             <div className="itemsShop">
-                {items.filter(item => item.title.toLowerCase().includes(search.toLocaleLowerCase()))
+                {items
+                    .filter(item => item.title.toLowerCase().includes(search.toLocaleLowerCase()))
                     .map((item, index) => (
                         <Card
                             key={index}
                             plusClick={(obj) => onAddToCart(obj)}
-                            onFavorite={(obj) => addToFavorite(obj)} 
+                            onFavorite={(obj) => addToFavorite(obj)}
+                            isAdded={cartItems.some(obj => Number(obj.id) === Number(item.id))}
                             {...item}
-                            />
+                        />
                     ))}
             </div>
         </div>
