@@ -70,7 +70,7 @@ function App() {
   }
 
   return (
-    <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, addToFavorite }}>
+    <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, addToFavorite, setCartOpened, setCartItems }}>
       <div className="outer">
         {cartOpened && <Drawer onClose={() => setCartOpened(false)}
           items={cartItems}

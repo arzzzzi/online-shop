@@ -82,6 +82,9 @@ header {
         line-height: 24px;
         margin: 40px 0 200px 0;
     }
+    h2 {
+        margin: 30px;
+    }
     .greenButton {
         width: 245px;
         margin-top: 20px;
@@ -143,7 +146,7 @@ header {
 
 .drawer {
     position: absolute;
-    width: 420px;
+    width: 320px;
     height: calc(100% - 60px);
     right: 0;
     padding: 30px;
@@ -184,6 +187,9 @@ header {
             }
             .greenButton {
                 position: relative;
+                &:disabled {
+                    animation: button-loading 0.6s ease-in-out infinite;
+                }
                 &:hover {
                     img {
                         transform: translateX(5px);
@@ -276,6 +282,10 @@ header {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.1s ease-in-out;
+    &:disabled {
+        background-color: #bebebe !important;
+        cursor: default;
+    }
     &:hover {
         background: lighten(#9dd558, 5%);
     }
@@ -284,4 +294,16 @@ header {
 .arrow {
     height: 40px;
     width: 40px;
+}
+
+@keyframes button-loading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
 }
