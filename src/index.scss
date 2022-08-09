@@ -144,21 +144,55 @@ header {
 .drawer {
     position: absolute;
     width: 420px;
-    height: 777px;
+    height: calc(100% - 60px);
     right: 0;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    .items {
-        flex: 1;
-        overflow: auto;
-    }
     h2 {
         margin-bottom: 30px;
         display: flex;
         justify-content: space-between;
         img {
             cursor: pointer;
+        }
+    }
+    .drawerInner {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        .items {
+            flex: 1;
+            overflow: auto;
+        }
+        .cartTotalBlock {
+            ul {
+                display: block;
+                margin-bottom: 40px !important;
+            }
+            div {
+                flex: 1;
+                border-bottom: 1px dashed #dfdfdf;
+                position: relative;
+                top: -4px;
+                margin: 0 8px;
+            }
+            li {
+                display: flex;
+                align-items: flex-end;
+                margin-bottom: 20px;
+            }
+            .greenButton {
+                position: relative;
+                &:hover {
+                    img {
+                        transform: translateX(5px);
+                    }
+                }
+                img {
+                    transition: transform 0.15s ease-in-out;
+                }
+            }
         }
     }
     background: #fff;
@@ -250,34 +284,4 @@ header {
 .arrow {
     height: 40px;
     width: 40px;
-}
-
-.cartTotalBlock {
-    ul {
-        display: block;
-        margin-bottom: 40px !important;
-    }
-    div {
-        flex: 1;
-        border-bottom: 1px dashed #dfdfdf;
-        position: relative;
-        top: -4px;
-        margin: 0 8px;
-    }
-    li {
-        display: flex;
-        align-items: flex-end;
-        margin-bottom: 20px;
-    }
-    .greenButton {
-        position: relative;
-        &:hover {
-            img {
-                transform: translateX(5px);
-            }
-        }
-        img {
-            transition: transform 0.15s ease-in-out;
-        }
-    }
 }

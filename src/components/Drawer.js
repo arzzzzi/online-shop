@@ -7,7 +7,7 @@ function Drawer({ onClose, items = [], onRemove }) {
                     onClick={onClose} />
                 </h2>
                 {items.length > 0 ? (
-                    <div>
+                    <div className="drawerInner">
                         <div className="items">
                             {items.map((obj) => (
                                 <div key={obj.id} className="cartItem">
