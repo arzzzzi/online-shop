@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import Info from "./Info";
-import { useCart } from "../hooks/useCart";
+import Info from "../Info";
+import { useCart } from "../../hooks/useCart";
+import styles from './Drawer.module.scss';
+
+
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-function Drawer({ onClose, items = [], onRemove }) {
+function Drawer({ onClose, items = [], onRemove, opened }) {
     const {cartItems, setCartItems, totalPrice} = useCart();
     const [isCompleted, setIsCompleted] = useState(false)
     const [orderId, setOrderId] = useState(null);
@@ -34,21 +37,21 @@ function Drawer({ onClose, items = [], onRemove }) {
     }
 
     return (
-        <div className="overlay">
-            <div className="drawer">
+        <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+            <div className={styles.drawer}>
                 <h2>Корзина <img className="btnRemove"
                     src="/img/btn-remove.svg" alt='Remove'
                     onClick={onClose} />
                 </h2>
                 {items.length > 0 ? (
-                    <div className="drawerInner">
-                        <div className="items">
+                    <div className={styles.drawerInner}>
+                        <div className={styles.items}>
                             {items.map((obj) => (
                                 <div key={obj.id} className="cartItem">
                                     <div style={{ backgroundImage: `url(${obj.imgUrl})` }} className="cartItemImg"></div>
                                     <div>
                                         <p>{obj.title}</p>
-                                        <b>{obj.price}</b>
+                                        <b>{obj.price} руб.</b>
                                     </div>
                                     <img className="btnRemove"
                                         src="/img/btn-remove.svg"
@@ -57,7 +60,7 @@ function Drawer({ onClose, items = [], onRemove }) {
                                 </div>
                             ))}
                         </div>
-                        <div className="cartTotalBlock">
+                        <div className={styles.cartTotalBlock}>
                             <ul>
                                 <li>
                                     <span>Итого:</span>
