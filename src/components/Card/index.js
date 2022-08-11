@@ -41,13 +41,14 @@ function Card({
         <rect x="115" y="230" rx="10" ry="10" width="35" height="35" />
       </ContentLoader> :
         <>
-          <div onClick={handleFavorite} className={styles.favorite}>
-            <img
-              width={22} height={22}
-              src={isFavorite ? '/img/like.png' : '/img/unliked.svg'}
-              alt="Unlike"
-            />
-          </div>
+          {onFavorite &&
+            <div onClick={handleFavorite} className={styles.favorite}>
+              <img
+                width={22} height={22}
+                src={isFavorite ? '/img/like.png' : '/img/unliked.svg'}
+                alt="Unlike"
+              />
+            </div>}
           <img width='100%' height={135} src={imgUrl} />
           <h5>{title}</h5>
           <div className="cardBtn">
@@ -55,10 +56,11 @@ function Card({
               <span>Цена: </span>
               <b>{price} руб.</b>
             </div>
-            <img onClick={handlePlus}
-              className={styles.plus}
-              width={11} height={11}
-              src={isItemAdded(id) ? "./img/btn-checked.svg" : "./img/btn-plus.svg"} />
+            {plusClick &&
+              <img onClick={handlePlus}
+                className={styles.plus}
+                width={11} height={11}
+                src={isItemAdded(id) ? "./img/btn-checked.svg" : "./img/btn-plus.svg"} />}
           </div>
         </>}
     </div>

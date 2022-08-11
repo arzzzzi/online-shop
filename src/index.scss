@@ -145,8 +145,8 @@ header {
 }
 
 .drawer {
-    position: absolute;
-    width: 320px;
+    position: fixed;
+    width: 350px;
     height: calc(100% - 60px);
     right: 0;
     padding: 30px;
@@ -164,9 +164,9 @@ header {
         display: flex;
         flex-direction: column;
         flex: 1;
+        overflow: auto;
         .items {
             flex: 1;
-            overflow: auto;
         }
         .cartTotalBlock {
             ul {
@@ -209,7 +209,7 @@ header {
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
